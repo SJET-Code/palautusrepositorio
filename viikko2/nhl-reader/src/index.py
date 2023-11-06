@@ -1,9 +1,5 @@
-from player import Player
 from playerreader import PlayerReader
 from playerstats import PlayerStats
-
-import requests
-from player import Player
 
 def main():
     url = "https://studies.cs.helsinki.fi/nhlstats/2022-23/players"
