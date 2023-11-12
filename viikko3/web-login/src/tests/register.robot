@@ -1,5 +1,6 @@
 *** Settings ***
 Resource  resource.robot
+Resource  login_resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
 Test Setup  Go To Register Page
@@ -32,15 +33,28 @@ Register With Nonmatching Password And Password Confirmation
     Set Password Confirmation  hermann!
     Submit Register
     Register Should Fail With Message  The passwords differ
-    
-*** Keywords ***
-Register Should Succeed
-    Welcome Page Should Be Open
 
-Register Should Fail With Message
-    [Arguments]  ${message}
-    Register Page Should Be Open
-    Page Should Contain  ${message}
+Login After Successful Registration
+    Set Username  pelle
+    Set Password  hermann1
+    Set Password Confirmation  hermann1
+    Submit Register
+    Go To Login Page
+    Set Username  pelle
+    Set Password  hermann1
+    Submit Credentials
+    Login Should Succeed
 
-Submit Register
-    Click Button  Register
+Login After Failed Registration
+    Set Username  pelle
+    Set Password  hermanni
+    Set Password Confirmation  hermanni
+    Submit Register
+    Register Should Fail With Message  Password must contain non-letter characters
+    Go To Login Page
+    Login Page Should Be Open
+    Set Username  pelle
+    Set Password  hermanni
+    Submit Credentials
+    Login Should Fail With Message  Invalid username or password
+

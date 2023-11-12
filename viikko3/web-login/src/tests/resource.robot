@@ -39,15 +39,3 @@ Go To Register Page
 
 Go To Main Page
     Go To  ${HOME_URL}
-
-Set Username
-    [Arguments]  ${username}
-    Input Text  username  ${username}
-
-Set Password
-    [Arguments]  ${password}
-    Input Password  password  ${password}
-
-Set Password Confirmation
-    [Arguments]  ${password}
-    Input Password  password_confirmation  ${password}
